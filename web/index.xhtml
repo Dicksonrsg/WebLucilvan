@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Cadastro Pessoa</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    </h:head>
+    <h:body>
+        <center>
+            <h:outputText value="Cadastro de Pessoa" style="font-weight: bold"/>
+            <hr/>
+            <messages/>
+            <h:form>
+                <table>
+                    <tr>
+                        <td>
+                            Nome:
+                        </td>
+                        <td>
+                            <h:inputText value="#{pessoaCtrlBean.pessoa.nome}" size="50" requiredMessage="Nome: Campo obrigatorio" class="form-control"></h:inputText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            RG:
+                        </td>
+                        <td>
+                            <h:inputText value="#{pessoaCtrlBean.pessoa.rg}" size="50" requiredMessage="RG: Campo obrigatorio" class="form-control"></h:inputText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Data Nascimento:
+                        </td>
+                        <td>
+                            <h:inputText value="#{pessoaCtrlBean.pessoa.datnasc}" size="50" requiredMessage="Nascimento: Campo obrigatorio" class="form-control"><f:convertDateTime pattern="dd/mm/yyyy"/></h:inputText>
+                        </td>
+                    </tr> 
+                    <tr>
+                        <td>Sexo</td>
+                        <td>  
+                            <h:selectOneRadio value="#{pessoaCtrlBean.pessoa.sexo}">
+                                <f:selectItem itemValue="M" itemLabel="Masculino"/>
+                                <f:selectItem itemValue="F" itemLabel="Feminino"/>
+                            </h:selectOneRadio>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" align="center">
+                            <h:commandButton value="Cadastrar" action="#{pessoaCtrlBean.insert()}" class="btn btn-success"></h:commandButton>
+                        </td>
+                    </tr>
+                </table>
+            </h:form>
+        </center>
+        <hr/>
+        <center>
+            <h:outputText value="Listar Pessoa!" style="font-weight: bold"/>
+            <h:form>
+                <h:messages/>
+                <h:dataTable value="#{pessoaCtrlBean.pessoas}" var="pessoa" border="1">
+                    <h:column>
+                        <f:facet name="header">Nome</f:facet>
+                        #{pessoa.nome}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">RG</f:facet>
+                        #{pessoa.rg}
+                    </h:column>  
+                    <h:column>
+                        <f:facet name="header">Sexo</f:facet>
+                        #{pessoa.sexo}
+                    </h:column>                    
+                    <h:column>
+                        <f:facet name="header">Data Nascimneto</f:facet> 
+                        <h:inputText value="#{pessoa.datnasc}"><f:convertDateTime pattern="dd/mm/yyyy"/></h:inputText>                        
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            Sexo
+                        </f:facet>
+                        #{pessoa.sexo}
+                    </h:column>
+                    <h:column>
+                    <f:facet name="header">Excluir</f:facet>
+                    <h:commandLink value="Excluir" action="#{pessoaCtrlBean.delete(pessoa)}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </center>
+    </h:body>
+</html>
+
